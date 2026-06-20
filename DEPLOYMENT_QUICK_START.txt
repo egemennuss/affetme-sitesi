@@ -1,0 +1,99 @@
+🚀 HIZLI BAŞLANGÇ REHBERI - GitHub Pages Deployment
+
+========================================
+ADIM 1: GitHub Repo'ını Oluştur
+========================================
+
+1. GitHub.com'a git (https://github.com/new)
+2. Repo adı: affetme-sitesi
+3. Description: "Sevgiyle yapılmış animasyonlu affetme sitesi 💕"
+4. Public seç
+5. "Create repository" tıkla
+
+========================================
+ADIM 2: Terminal'de Dosyaları Push Et
+========================================
+
+Terminali aç ve şu komutları çalıştır:
+
+cd /Users/gokhanaltin/Downloads/artıeksi
+git remote add origin https://github.com/YOUR_USERNAME/affetme-sitesi.git
+git branch -M main
+git push -u origin main
+
+(YOUR_USERNAME yerine kendi GitHub kullanıcı adını yaz!)
+
+========================================
+ADIM 3: GitHub Pages'i Aktifleştir
+========================================
+
+1. GitHub'da repo sayfasına git
+2. Settings (Ayarlar) tıkla
+3. Sol menüden "Pages" tıkla
+4. Build and deployment kısmında:
+   - Branch: main
+   - Folder: / (root)
+5. Save tıkla
+
+========================================
+ADIM 4: Site Canlı! 🎉
+========================================
+
+2-3 dakika bekle, sonra şu URL'de siteyi görürsün:
+
+https://YOUR_USERNAME.github.io/affetme-sitesi/
+
+========================================
+BONUS: Telefonunuzda Test Edin
+========================================
+
+✅ iPhone Safari - Mükemmel
+✅ Android Chrome - Mükemmel  
+✅ Google Lens - Uyumlu
+✅ Tüm tarayıcılar - Optimize
+
+QR kod ile paylaşmak için:
+1. Siteyi aç
+2. URL'i seç ve paylaş
+3. arkadaşa link gönder
+
+========================================
+TİPLER & HİLELER
+========================================
+
+🔒 Telefon numarası:
+   - Kendi telefon numaranızı girin
+   - index.html'de checkPhone() fonksiyonunu bulun
+
+🎨 Renkler değiştirmek için:
+   - #667eea (mavi) vs #764ba2 (mor) yerine başka renkler yazın
+
+💌 Mesajları özelleştirmek için:
+   - noMessages arrayini düzenleyin
+
+========================================
+GİTHUB PAGES SORUN GİDERME
+========================================
+
+Sitesi görünmüyorsa:
+1. Settings → Pages'e git
+2. Branch main, folder / olduğunu kontrol et
+3. 5 dakika bekle
+4. Sayfayı refresh et (Ctrl+Shift+R)
+
+Terminal komutları başarısız olursa:
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git push -u origin main
+
+========================================
+TAMAMLANDI! ✨
+========================================
+
+Artık siteniz 24/7 çalışıyor!
+Arkadaşınızla linki paylaş ve efektleri keyfini çıkar! 💕
+
+========================================
+Sorular? GitHub repo'sundaki Issues'a yazabilirsin!
+
+Made with 💕 for special someone

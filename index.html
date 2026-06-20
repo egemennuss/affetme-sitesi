@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bana Affetsen?">
+    <meta name="description" content="Sevgiyle yapılmış bir affetme sitesi 💕">
+    <meta name="keywords" content="aşk, affetme, romantik, kalp">
+    <title>Bana Affetsen? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overscroll-behavior: none;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+            position: fixed;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-container {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .reasons {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .reasons h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .reason-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .reason-item:nth-child(1) { animation-delay: 0.1s; }
+        .reason-item:nth-child(2) { animation-delay: 0.2s; }
+        .reason-item:nth-child(3) { animation-delay: 0.3s; }
+        .reason-item:nth-child(4) { animation-delay: 0.4s; }
+        .reason-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .funny-message {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-yes:active {
+            transform: scale(0.98);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-no {
+            background: #e9ecef;
+            color: #495057;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-no:active {
+            transform: scale(0.98);
+        }
+
+        .message-box {
+            background: #e7f3ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            color: #0c5aa0;
+        }
+
+        .message-box.show {
+            display: block;
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            color: #999;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .floating-emoji {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            animation: float-up 3s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(50px) scale(0.5) rotate(360deg);
+            }
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        @keyframes particle-burst {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        .pulse-text {
+            animation: textPulse 0.6s ease-out;
+        }
+
+        @keyframes textPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .bounce {
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .rain {
+            position: fixed;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(255, 105, 180, 0.8), transparent);
+            animation: rain-fall 0.8s linear forwards;
+        }
+
+        @keyframes rain-fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sparkle-fade 1.5s ease-out forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) translateY(-100px);
+            }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lock-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: rotation 2s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .modal-content h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            appearance: none;
+            -webkit-appearance: none;
+            -webkit-border-radius: 10px;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.3);
+            transform: scale(1.02);
+        }
+
+        .modal-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .modal-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .secret-page {
+            display: none;
+            text-align: center;
+            z-index: 3000;
+        }
+
+        .secret-page.show {
+            display: block;
+        }
+
+        .unlock-animation {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: unlockBounce 0.8s ease-out;
+        }
+
+        @keyframes unlockBounce {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .secret-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.8;
+            animation: messageReveal 1s ease-out;
+        }
+
+        @keyframes messageReveal {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .heart-floats {
+            font-size: 40px;
+            margin: 20px 0;
+            animation: floatHearts 2s ease-out infinite;
+        }
+
+        @keyframes floatHearts {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 25px;
+                border-radius: 15px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+                padding: 15px;
+                font-size: 18px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .lock-icon {
+                font-size: 60px;
+            }
+
+            .modal-button {
+                padding: 15px;
+                font-size: 18px;
+            }
+
+            .timer {
+                font-size: 36px;
+            }
+
+            .reasons {
+                padding: 15px;
+            }
+
+            .reason-item {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .container {
+                max-height: 95vh;
+                padding: 20px;
+            }
+
+            .reasons {
+                padding: 15px;
+            }
+
+            .reason-item {
+                padding: 8px;
+                margin-bottom: 5px;
+            }
+        }
+
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+                padding-top: max(0px, env(safe-area-inset-top));
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-container">💕✨💕</div>
+        <h1>Bana Affetsen?</h1>
+        <p class="subtitle">Seni sevdiğimi biliyorsun... 🥺</p>
+
+        <div class="funny-message">
+            😅 Hayat senin olmadan gri ve sıkıcı. Benim hatamı affedebilir misin? Sana her gün 100 tane sevgi demişim bile sayılmaz!
+        </div>
+
+        <div class="reasons">
+            <h2>🌟 Senin hakkında bilirim ki:</h2>
+            <div class="reason-item">
+                ✨ Gülüşün benim en sevdiğim şey - dünyayı aydınlatıyor
+            </div>
+            <div class="reason-item">
+                💫 Senin gibi kibar ve tatlı bir kişi hiç görmedim
+            </div>
+            <div class="reason-item">
+                🎨 Her an seninle daha güzel hissediyorum
+            </div>
+            <div class="reason-item">
+                🌹 Senin enerjin beni mutlu kılıyor
+            </div>
+            <div class="reason-item">
+                💎 Sen benim hayatımın en değerli kişisisin
+            </div>
+        </div>
+
+        <div class="timer" id="timer"></div>
+
+        <div style="background: #fff3f0; padding: 15px; border-radius: 10px; margin-bottom: 25px; color: #c41e3a;">
+            <strong>⏰ Seni uzun süredir özledim...</strong>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-yes" onclick="handleYes()">Affetim! 💕</button>
+            <button class="btn-no" onclick="handleNo()">Biraz daha... 😋</button>
+        </div>
+
+        <div class="message-box" id="messageBox"></div>
+    </div>
+
+    <!-- MODAL - Kilit Açma -->
+    <div class="modal-overlay" id="lockModal">
+        <div class="modal-content">
+            <div class="lock-icon">🔐</div>
+            <h2>Affetme Kilidini Aç!</h2>
+            <p>Bu affetmeyi tamamlamak için benim telefon numaramı yazmalısın! 📱</p>
+            <div class="input-group">
+                <input type="tel" class="modal-input" id="phoneInput" placeholder="Telefon Numaramı Gir" maxlength="20" autocomplete="off">
+            </div>
+            <button class="modal-button" onclick="checkPhone()">Kilidin Aç 🔓</button>
+            <p style="margin-top: 20px; font-size: 12px; color: #999;">💡 İpucu: Telefonun başında +90 veya 0 ile mi başlıyordu?</p>
+        </div>
+    </div>
+
+    <!-- GİZLİ SAYFA - Final Mesaj -->
+    <div class="secret-page" id="secretPage">
+        <div class="container">
+            <div class="unlock-animation">🔓✨</div>
+            <h1 style="color: #764ba2; font-size: 36px; margin-bottom: 20px;">KILIT AÇILDI! 💕</h1>
+            
+            <div class="secret-message">
+                <p style="font-size: 20px; margin-bottom: 15px;">
+                    Sevgilim... 🥺💕
+                </p>
+                <p>
+                    Seni çok seviyorum ve bu sürede seni özledim!<br><br>
+                    Gülüşün olmadan her gün renkten uzaklaşıyor benim hayatım.<br>
+                    Lütfen affet, çünkü <strong>sen benim her şeyimsin.</strong><br><br>
+                    Seninle daha güzel olacağımıza söz veriyorum! 🌹
+                </p>
+            </div>
+
+            <div class="heart-floats">💕 💕 💕</div>
+
+            <button class="modal-button" style="margin-top: 20px; padding: 15px 40px;" onclick="celebrateForgiveness()">
+                🎉 Beni Affettim! 🎉
+            </button>
+
+            <p style="margin-top: 30px; color: #999; font-size: 14px;">
+                ✨ Bu an sonsuza dek güzel kalacak ✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const messages = [
+            "Lütfen! Seni seviyorum! 🥺",
+            "Bir daha olmaması için söz veriyorum... 💔",
+            "Bana şans ver! 🙏",
+            "Senin gülüşü görmek istiyorum! 😭",
+            "Affetmezsen ölürüm! 😩",
+            "Tamam TAMAM affetmek zorundasın! 🤗"
+        ];
+
+        const noMessages = [
+            "Hadi ya... 🥺",
+            "Cidden mi? 😢",
+            "Beni incitiyorsun... 💔",
+            "Seni sevdiğimi biliyorsun! 🤍",
+            "Bir şansı daha versene... 🙏"
+        ];
+
+        // Uçan emoji efekti
+        function createFloatingEmoji(emoji, x, y) {
+            const element = document.createElement('div');
+            element.className = 'floating-emoji';
+            element.textContent = emoji;
+            element.style.left = x + 'px';
+            element.style.top = y + 'px';
+            element.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+            document.body.appendChild(element);
+            
+            setTimeout(() => element.remove(), 3000);
+        }
+
+        // Parçacık patlaması efekti
+        function createParticleBurst(x, y, color, count = 20) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = Math.random() * 8 + 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = color;
+                
+                const angle = (i / count) * Math.PI * 2;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                particle.style.animation = `particle-burst ${1 + Math.random()}s ease-out forwards`;
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 2000);
+            }
+        }
+
+        // Sparkle (kıvılcım) efekti
+        function createSparkles(x, y, count = 15) {
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.animationDelay = Math.random() * 0.3 + 's';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        }
+
+        // Yağmur efekti
+        function createRain() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.className = 'rain';
+                    drop.style.left = Math.random() * 100 + '%';
+                    drop.style.top = -20 + 'px';
+                    drop.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+                    document.body.appendChild(drop);
+                    
+                    setTimeout(() => drop.remove(), 1500);
+                }, i * 30);
+            }
+        }
+
+        // Kalp yağmuru
+        function createHeartRain() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '-50px';
+                    heart.style.fontSize = '30px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = 'float-up 2s ease-out forwards';
+                    heart.textContent = '💕';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 2500);
+                }, i * 50);
+            }
+        }
+
+        function handleYes() {
+            const btn = document.querySelector('.btn-yes');
+            const messageBox = document.getElementById('messageBox');
+            
+            btn.classList.add('bounce');
+            
+            messageBox.innerHTML = `
+                <h2>🎉 AAAHHH! Sevgiiiim!</h2>
+                <p style="font-size: 18px; margin-top: 15px;">
+                    Affettiğin için çok teşekkür ederim! 😭💕<br>
+                    Seni çok çok seviyorum!<br>
+                    <strong>Her zaman seninle daha iyi olacak!</strong>
+                </p>
+            `;
+            messageBox.classList.add('show');
+            messageBox.classList.add('pulse-text');
+            
+            document.querySelector('.btn-yes').disabled = true;
+            document.querySelector('.btn-no').disabled = true;
+            
+            createConfetti();
+            createHeartRain();
+            createParticleBurst(window.innerWidth / 2, window.innerHeight / 2, '#FF69B4', 40);
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2, 30);
+            
+            setTimeout(() => createRain(), 300);
+            setTimeout(() => {
+                for (let i = 0; i < 10; i++) {
+                    const x = window.innerWidth * Math.random();
+                    const y = window.innerHeight * Math.random();
+                    createFloatingEmoji('💕', x, y);
+                }
+            }, 500);
+            
+            setTimeout(() => {
+                for (let i = 0; i < 8; i++) {
+                    const emojis = ['😍', '🥰', '😘', '🎉', '✨', '🌹', '💎', '🔥'];
+                    const x = window.innerWidth * Math.random();
+                    const y = window.innerHeight * Math.random();
+                    createFloatingEmoji(emojis[Math.floor(Math.random() * emojis.length)], x, y);
+                }
+            }, 800);
+            
+            playHeartAnimation();
+            
+            setTimeout(() => {
+                document.getElementById('lockModal').classList.add('show');
+            }, 2000);
+        }
+
+        function handleNo() {
+            noClickCount++;
+            const messageBox = document.getElementById('messageBox');
+            const noBtn = document.querySelector('.btn-no');
+            
+            noBtn.classList.add('shake');
+            setTimeout(() => noBtn.classList.remove('shake'), 500);
+            
+            if (noClickCount <= noMessages.length) {
+                messageBox.innerHTML = `<p>${noMessages[noClickCount - 1]}</p>`;
+                messageBox.classList.add('show');
+                messageBox.classList.add('pulse-text');
+                
+                createFloatingEmoji('😭', Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+                
+                if (noClickCount === 1) {
+                    createParticleBurst(noBtn.getBoundingClientRect().left + 75, noBtn.getBoundingClientRect().top + 25, '#FF69B4', 15);
+                }
+                
+                if (noClickCount >= 3) {
+                    document.querySelector('.btn-no').style.position = 'relative';
+                    document.querySelector('.btn-no').style.left = (Math.random() - 0.5) * 100 + 'px';
+                    document.querySelector('.btn-no').style.top = (Math.random() - 0.5) * 100 + 'px';
+                    
+                    for (let i = 0; i < 5; i++) {
+                        createFloatingEmoji('😢', Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+                    }
+                }
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#FF69B4', '#FFD700', '#FF6B6B', '#00FF88', '#00D4FF'];
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.borderRadius = '50%';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function playHeartAnimation() {
+            const hearts = document.createElement('div');
+            hearts.style.fontSize = '50px';
+            hearts.style.position = 'fixed';
+            hearts.style.top = '50%';
+            hearts.style.left = '50%';
+            hearts.style.transform = 'translate(-50%, -50%)';
+            hearts.style.animation = 'fadeOut 2s ease-out forwards';
+            hearts.style.zIndex = '9999';
+            hearts.innerHTML = '💕 💕 💕';
+            document.body.appendChild(hearts);
+            
+            setTimeout(() => hearts.remove(), 2000);
+        }
+
+        function startTimer() {
+            let seconds = 0;
+            const timerElement = document.getElementById('timer');
+            
+            setInterval(() => {
+                seconds++;
+                const hours = Math.floor(seconds / 3600);
+                const mins = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                timerElement.innerHTML = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Mouse takip efekti
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.02) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        });
+
+        // Touch support için
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && Math.random() < 0.02) {
+                const touch = e.touches[0];
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = touch.clientX + 'px';
+                sparkle.style.top = touch.clientY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        });
+
+        // Sayfa yüklendiğinde efekt
+        window.addEventListener('load', () => {
+            createFloatingEmoji('💕', Math.random() * window.innerWidth, 0);
+            setTimeout(() => createFloatingEmoji('✨', Math.random() * window.innerWidth, 0), 200);
+            setTimeout(() => createFloatingEmoji('💫', Math.random() * window.innerWidth, 0), 400);
+        });
+
+        // Telefon numarası kontrol
+        function checkPhone() {
+            const phoneInput = document.getElementById('phoneInput').value.trim();
+            const phoneBtn = document.querySelector('.modal-button');
+            
+            const cleaned = phoneInput.replace(/\D/g, '');
+            
+            if (cleaned.length >= 10) {
+                phoneBtn.disabled = true;
+                phoneBtn.textContent = '✨ Kilit Açılıyor...';
+                
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        document.body.appendChild(sparkle);
+                        setTimeout(() => sparkle.remove(), 1500);
+                    }, i * 30);
+                }
+                
+                setTimeout(() => {
+                    document.getElementById('lockModal').classList.remove('show');
+                    document.getElementById('secretPage').classList.add('show');
+                    createConfetti();
+                }, 800);
+            } else {
+                document.getElementById('phoneInput').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('phoneInput').style.animation = '';
+                }, 500);
+                
+                phoneBtn.textContent = '❌ Lütfen geçerli bir telefon numarası gir!';
+                setTimeout(() => {
+                    phoneBtn.textContent = 'Kilidin Aç 🔓';
+                }, 2000);
+            }
+        }
+
+        // Enter tuşuyla submit
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && document.getElementById('lockModal').classList.contains('show')) {
+                checkPhone();
+            }
+        });
+
+        // Son kutlama
+        function celebrateForgiveness() {
+            createConfetti();
+            createRain();
+            createHeartRain();
+            createParticleBurst(window.innerWidth / 2, window.innerHeight / 2, '#FF69B4', 50);
+            
+            setTimeout(() => {
+                for (let i = 0; i < 20; i++) {
+                    const emojis = ['💕', '😍', '🥰', '😘', '🎉', '✨', '🌹', '💎'];
+                    const x = window.innerWidth * Math.random();
+                    const y = window.innerHeight * Math.random();
+                    createFloatingEmoji(emojis[Math.floor(Math.random() * emojis.length)], x, y);
+                }
+            }, 300);
+        }
+
+        startTimer();
+    </script>
+</body>
+</html>
